@@ -1,10 +1,9 @@
 // ============================================================
 // Supabase Configuration
-// Ganti URL dan ANON_KEY dengan milik Supabase project lo
 // ============================================================
 
-const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+const SUPABASE_URL = 'https://knmanesujxpfpomwabyb.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtubWFuZXN1anhwZnBvbXdhYnliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjE1MTMsImV4cCI6MjA5NjM5NzUxM30.szbaW_kXIbeM6Pe5_5dtrFUg0HasVisloxg8IAbsJG8';
 
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
