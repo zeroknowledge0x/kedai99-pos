@@ -19,21 +19,34 @@ const Auth = {
     },
 
     async login(email, password) {
-        const { data, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('email', email)
-            .eq('password', password)
-            .eq('active', true)
-            .single();
+        try {
+            if (!supabase) {
+                return { success: false, message: 'Database belum siap. Refresh halaman.' };
+            }
 
-        if (error || !data) {
-            return { success: false, message: 'Email atau password salah, atau akun tidak aktif.' };
+            console.log('Attempting login for:', email);
+            
+            const { data, error } = await supabase
+                .from('users')
+                .select('*')
+                .eq('email', email)
+                .eq('password', password)
+                .eq('active', true)
+                .single();
+
+            console.log('Login response:', { data: data ? 'found' : 'null', error: error ? error.message : 'none' });
+
+            if (error || !data) {
+                return { success: false, message: 'Email atau password salah, atau akun tidak aktif.' };
+            }
+
+            this.currentUser = data;
+            localStorage.setItem('kedai99_user', JSON.stringify(data));
+            return { success: true, user: data };
+        } catch (err) {
+            console.error('Login error:', err);
+            return { success: false, message: 'Gagal koneksi ke server: ' + err.message };
         }
-
-        this.currentUser = data;
-        localStorage.setItem('kedai99_user', JSON.stringify(data));
-        return { success: true, user: data };
     },
 
     logout() {
